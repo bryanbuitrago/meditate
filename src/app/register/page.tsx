@@ -1,9 +1,13 @@
+'use client'
+
+import RegisterForm from '../components/RegisterForm';
 function RegisterPage() {
     return (
         <div>
             <h1>
                 This is the register Page
             </h1>
+            <RegisterForm />
         </div>
     );
 }
