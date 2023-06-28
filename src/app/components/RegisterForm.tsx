@@ -9,13 +9,36 @@ const RegisterForm: React.FC = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
+    // e.preventDefault();
+    // // Perform registration logic here with username, password, and email
+    // console.log('Register form submitted');
+    // console.log('Username:', username);
+    // console.log('Password:', password);
+    // console.log('Email:', email);
+
     e.preventDefault();
-    // Perform registration logic here with username, password, and email
-    console.log('Register form submitted');
-    console.log('Username:', username);
-    console.log('Password:', password);
-    console.log('Email:', email);
+
+    try {
+      const response = await fetch('/api/register/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      if (response.ok) {
+        console.log('Registration successful');
+        // Handle successful registration
+      } else {
+        console.log('Registration failed');
+        // Handle registration failure
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      // Handle registration error
+    }
   };
 
   const handleGoogleLogin = () => {
