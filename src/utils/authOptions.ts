@@ -1,7 +1,14 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
+import { PrismaClient } from "@prisma/client";
+// import { PrismaAdapter } from "@auth/prisma-adapter";
+// User next-auth adapter instead
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+
+const prisma = new PrismaClient()
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
     session: {
         strategy: 'jwt'
     },
@@ -18,13 +25,24 @@ export const authOptions: NextAuthOptions = {
             const { email, password } = credentials as {
               email: string;
               password: string;
-            };
+            }
 
-            const user = credentials
-            console.log(user)
-        //   async authorize(credentials) {
-        //     console.log('credentials=', credentials)
-            return { user }
+            console.log('credentials= ', email, password)
+
+            const user = await prisma.user.findUnique({
+              where: {
+                email: credentials?.email
+              }
+            })
+            console.log('User From DB: ', user)
+
+            const isValid = credentials?.password === user?.password
+
+            console.log({id: user?.id, user: user?.username})
+
+            if(isValid) {
+              return {id: user?.id, user: user?.username }
+            }
           }
         })
       ],
