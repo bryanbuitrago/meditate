@@ -1,10 +1,35 @@
+import { NextResponse, type NextRequest } from "next/server";
+import { PrismaClient } from "@prisma/client";
 
-import { NextResponse } from "next/server";
-// import 
+type UserCredentials = {
+  username: string;
+  email: string;
+  password: string;
+};
 
-export async function POST(req: Request, res: NextResponse) {
-    const body = await req.json()
-    console.log(body)
+export async function POST(req: NextRequest, res: NextResponse) {
 
-    return res.json({ body: string })
+  const prisma = new PrismaClient();
+
+  const { username, email, password }: UserCredentials = await req.json();
+  console.log('credentials=', username, email, password);
+  
+  try {
+    const user = await prisma.user.create({
+      data: {
+        username,
+        email,
+        password,
+      },
+    });
+
+    return NextResponse.json({ user });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({
+        message: 'Internal server error'
+    }, {
+        status: 500,
+    })
+  }
 }
