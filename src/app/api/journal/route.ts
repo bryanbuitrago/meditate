@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 type JournalFieldTypes = {
   title: string;
   text: string;
-  email: string; // Add the 'email' property to the JournalFieldTypes type
+  email: string;
 };
 
 export async function POST(req: NextRequest, res: NextResponse) {
@@ -20,13 +20,29 @@ export async function POST(req: NextRequest, res: NextResponse) {
         title,
         text,
         user: {
-          connect: { email }, // Connect the journal entry to the user by their email
+          connect: { email },
         },
       },
     });
 
+    // Update the user to include the journal entry ID in the 'journals' field
+    const updatedUser = await prisma.user.update({
+      where: { email },
+      data: { journals: { connect: { id: journalEntry.id } } },
+    });
+
+    const user = await prisma.user.findUnique({
+      where: { email },
+      include: { journals: true }
+    })
+
+    // const { journals } = user
+
+
     console.log(journalEntry)
-    return NextResponse.json({ journalEntry });
+    console.log('=================')
+    console.log(user?.journals)
+    return NextResponse.json({ journalEntry, updatedUser, user });
   } catch (error) {
     console.error(error);
     return NextResponse.json({
@@ -36,41 +52,3 @@ export async function POST(req: NextRequest, res: NextResponse) {
     })
   }
 }
-
-
-
-// import { NextResponse, type NextRequest } from "next/server";
-// import { PrismaClient } from "@prisma/client";
-
-// type JournalFieldTypes = {
-//   title: string;
-//   text: string;
-// };
-
-// export async function POST(req: NextRequest, res: NextResponse) {
-
-//   const prisma = new PrismaClient();
-
-//   const { title, text, }: JournalFieldTypes = await req.json();
-//   console.log('credentials=', title, text) ;
-  
-//   try {
-
-//     const journalEntry = await prisma.journal.create({
-//       data: {
-
-//         title,
-//         text,
-//       },
-//     });
-
-//     return NextResponse.json({ data });
-//   } catch (error) {
-//     console.error(error);
-//     return NextResponse.json({
-//         message: 'Internal server error'
-//     }, {
-//         status: 500,
-//     })
-//   }
-// }
