@@ -41,7 +41,8 @@ export const authOptions: NextAuthOptions = {
             console.log({id: user?.id, user: user?.username})
 
             if(isValid) {
-              return {id: user?.id, user: user?.username }
+              // return {id: user?.id, user: user?.username }
+              return { ...user }
             }
           }
         })
