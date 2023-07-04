@@ -1,7 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Text } from '@chakra-ui/react';
 
 const Timer: React.FC = () => {
+
+  const { data: session } = useSession();
+
+
   const [hours, setHours] = useState('');
   const [minutes, setMinutes] = useState('');
   const [seconds, setSeconds] = useState('');
@@ -58,11 +63,44 @@ const Timer: React.FC = () => {
     setElapsedTime(elapsedSeconds);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const submittedTime = (parseInt(hours) || 0) * 3600 + (parseInt(minutes) || 0) * 60 + (parseInt(seconds) || 0) - timer;
-    console.log('Submitted time:', submittedTime);
-    // Here you can submit the `submittedTime` value to the API route
+    const userEmail = session?.user?.email
+    console.log('Submitted time: ', submittedTime);
+    console.log('Submitted email: ', userEmail)
+  
+    try {
+      const response = await fetch('/api/session/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          time: submittedTime,
+          email: userEmail,
+        }),
+      });
+  
+      if (response.ok) {
+        console.log('Time submitted successfully!');
+        // Reset the form values
+        setHours('');
+        setMinutes('');
+        setSeconds('');
+      } else {
+        console.error('Failed to submit time');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
+  
+
+  // const handleSubmit = () => {
+  //   const submittedTime = (parseInt(hours) || 0) * 3600 + (parseInt(minutes) || 0) * 60 + (parseInt(seconds) || 0) - timer;
+  //   console.log('Submitted time:', submittedTime);
+  //   // Here you can submit the `submittedTime` value to the API route
+  // };
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
