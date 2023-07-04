@@ -13,12 +13,20 @@ model User {
   password String
   username String
   journals Journal[]
+  sessions Session[]
 }
 
 model Journal {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   title  String
   text   String
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Session {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  time   Int
   userId String @db.ObjectId
   user   User   @relation(fields: [userId], references: [id])
 }
