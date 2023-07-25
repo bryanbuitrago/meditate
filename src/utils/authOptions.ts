@@ -1,9 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaClient } from "@prisma/client";
-// import { PrismaAdapter } from "@auth/prisma-adapter";
-// User next-auth adapter instead
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+
 
 const prisma = new PrismaClient()
 
@@ -47,6 +46,33 @@ export const authOptions: NextAuthOptions = {
           }
         })
       ],
+      callbacks:{
+        async jwt({ token, user, session }) {
+          console.log('jwt callback', { token, user, session})
+
+          // pass in user id and email address to token
+          if(user) {
+            return {
+              ...token,
+              id: user.id,
+              email: user.email,
+            }
+          }
+          return token
+        },
+        async session({ session, token, user }) {
+          console.log('session callback', { session, token, user })
+          return {
+            ...session,
+            user : {
+              ...session.user,
+              id: token.id,
+              email: token.email,
+            }
+          }
+          return session 
+        }
+      },
     pages: {
         signIn: '/login'
     }
