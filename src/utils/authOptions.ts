@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { verifyPassword } from "./authUtils";
 
 
 const prisma = new PrismaClient()
@@ -25,24 +26,34 @@ export const authOptions: NextAuthOptions = {
               email: string;
               password: string;
             }
-
-            console.log('credentials= ', email, password)
-
+            // Check if incoming user request credentials are valid
+            if (!credentials?.email || !credentials?.password) {
+              throw new Error('Invalid Credentials')
+            }
             const user = await prisma.user.findUnique({
               where: {
                 email: credentials?.email
               }
             })
-            console.log('User From DB: ', user)
 
-            const isValid = credentials?.password === user?.password
+            // Check if user from db exists & has password stored
 
-            console.log({id: user?.id, user: user?.username})
-
-            if(isValid) {
-              // return {id: user?.id, user: user?.username }
-              return { ...user }
+            if(!user || !user?.password) {
+              throw new Error('Invalid Credentials')
             }
+
+            // Verify passwords match (credentails user & db user) passwords match
+            const isValid = await verifyPassword(
+              credentials?.password,
+              user?.password
+            )
+
+            if(!isValid) {
+              throw new Error('Could not log you in!')
+            }
+
+            // return user if passwords match
+            return user
           }
         })
       ],
