@@ -8,7 +8,7 @@ type UserCredentials = {
   password: string;
 };
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
 
   const prisma = new PrismaClient();
 
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         password: hashedPassword
       },
     });
-    
+
     return NextResponse.json(user);
   } catch (error) {
     console.error(error);
