@@ -9,9 +9,6 @@ const prisma = new PrismaClient()
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
-    session: {
-        strategy: 'jwt'
-    },
     providers: [
          CredentialsProvider({
 
@@ -86,5 +83,8 @@ export const authOptions: NextAuthOptions = {
       },
     pages: {
         signIn: '/login'
-    }
+    },
+    session: {
+      strategy: 'jwt'
+  }, 
 }
