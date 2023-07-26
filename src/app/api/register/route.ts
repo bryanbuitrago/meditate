@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { hashPassword } from "@/lib/authUtils";
+import { hashPassword } from "@/utils/authUtils";
 
 type UserCredentials = {
   username: string;
