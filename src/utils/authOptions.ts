@@ -19,32 +19,31 @@ export const authOptions: NextAuthOptions = {
             password: { label: 'Password', type: 'password' }
           },
           async authorize(credentials) {
-            const { email, password } = credentials as {
-              email: string;
-              password: string;
-            }
-            // Check if incoming user request credentials are valid
+
+            // If credentials don't have email or password throw new error
             if (!credentials?.email || !credentials?.password) {
               throw new Error('Invalid Credentials')
             }
+
+            // Search for user in db
             const user = await prisma.user.findUnique({
               where: {
                 email: credentials?.email
               }
             })
 
-            // Check if user from db exists & has password stored
-
+            // If no user is found or no password is stored throw new error
             if(!user || !user?.password) {
               throw new Error('Invalid Credentials')
             }
 
-            // Verify passwords match (credentails user & db user) passwords match
+            // Verify passwords match (credentails-user & db-user) passwords match
             const isValid = await verifyPassword(
               credentials?.password,
               user?.password
             )
 
+            // If passwords don't match throw new error
             if(!isValid) {
               throw new Error('Could not log you in!')
             }
@@ -78,7 +77,6 @@ export const authOptions: NextAuthOptions = {
               email: token.email,
             }
           }
-          return session 
         }
       },
     pages: {
