@@ -14,6 +14,17 @@ export async function POST(req: NextRequest) {
 
   const { username, email, password }: UserCredentials = await req.json();
 
+  if (
+    !email ||
+    !email.includes('@') ||
+    !password ||
+    password.trim().length < 7
+  ) {
+    return NextResponse.json({
+      message: 'Invalid input - Password should be at least 7 characters long.',
+    })
+  }
+  
   const hashedPassword = await hashPassword(password)
   
   try {
