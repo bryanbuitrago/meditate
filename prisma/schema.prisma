@@ -8,14 +8,14 @@ generator client {
 }
 
 model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  email     String    @unique
-  password  String
-  name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  journals  Journal[]
-  sessions  Session[]
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  email       String       @unique
+  password    String
+  name        String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  journals    Journal[]
+  meditations Meditation[]
 }
 
 model Journal {
@@ -27,7 +27,7 @@ model Journal {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Session {
+model Meditation {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   time          Int
   startDateTime DateTime
