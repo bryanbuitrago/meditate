@@ -28,7 +28,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   console.log('Parsed start time:', dateTimeFormat);
 
   try {
-    const sessionEntry = await prisma.session.create({
+    const meditationSession = await prisma.meditation.create({
       data: {
         time,
         startDateTime: dateTimeFormat,
@@ -41,9 +41,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
     // Update the user to include the journal entry ID in the 'journals' field
     const updatedUser = await prisma.user.update({
       where: { email },
-      data: { sessions: { connect: { id: sessionEntry.id } } },
+      data: { meditations: { connect: { id: meditationSession.id } } },
     });
-    return NextResponse.json({ sessionEntry, updatedUser });
+    return NextResponse.json({ meditationSession, updatedUser });
   } catch (error) {
     console.error(error);
     return NextResponse.json({
