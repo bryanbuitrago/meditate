@@ -3,7 +3,7 @@ import { PrismaClient, User } from "@prisma/client";
 import { hashPassword } from "@/utils/authUtils";
 
 type UserCredentials = {
-  username: string;
+  name: string;
   email: string;
   password: string;
 }
@@ -11,7 +11,7 @@ type UserCredentials = {
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const prisma = new PrismaClient();
 
-  const { username, email, password }: UserCredentials = await req.json();
+  const { name, email, password }: UserCredentials = await req.json();
 
   // Validate user data
   if (
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const user: User = await prisma.user.create({
       data: {
-        username,
+        name,
         email,
         password: hashedPassword
       },
