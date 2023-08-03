@@ -21,7 +21,7 @@ const LoginForm: React.FC = () => {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       const result = await signIn('credentials', {
-        redirect: false,
+        redirect: true,
         email: data.email,
         password: data.password,
       }) as SignInResponse;
@@ -47,6 +47,7 @@ const LoginForm: React.FC = () => {
   const handleGitHubLogin = () => {
     // Handle GitHub login
     console.log('GitHub login');
+    return signIn('github')
   };
 
   return (
