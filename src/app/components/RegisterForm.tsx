@@ -5,17 +5,12 @@ import Image from 'next/image';
 import { Box, Button, FormControl, FormLabel, Input, Stack, Center, Text, Divider } from '@chakra-ui/react';
 
 const RegisterForm: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
-    // e.preventDefault();
-    // // Perform registration logic here with username, password, and email
-    // console.log('Register form submitted');
-    // console.log('Username:', username);
-    // console.log('Password:', password);
-    // console.log('Email:', email);
+    // // Perform registration logic here with name, password, and email
 
     e.preventDefault();
 
@@ -25,7 +20,7 @@ const RegisterForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ name, email, password }),
       });
 
       if (response.ok) {
@@ -52,7 +47,7 @@ const RegisterForm: React.FC = () => {
   };
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+    setName(e.target.value);
   };
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -67,12 +62,12 @@ const RegisterForm: React.FC = () => {
     <Box maxWidth="md" mx="auto" mt={8} p={4}>
       <form onSubmit={handleSubmit}>
         <Stack spacing={4}>
-          <FormControl id="username">
+          <FormControl id="name">
             <FormLabel>Username</FormLabel>
             <Input
               type="text"
-              placeholder="Enter your username"
-              value={username}
+              placeholder="Enter your name"
+              value={name}
               onChange={handleUsernameChange}
             />
           </FormControl>
