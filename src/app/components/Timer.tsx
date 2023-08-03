@@ -13,6 +13,7 @@ const Timer: React.FC = () => {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [startDateTime, setStartDateTime] = useState('');
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  // const [createdAt, setCreatedAt] = useState<string | null>(null); // Set initial value to null
 
   useEffect(() => {
     if (timer === 0 && isRunning) {
@@ -81,6 +82,8 @@ const Timer: React.FC = () => {
     const userEmail = session?.user?.email;
     // const formattedStartTime = new Date(startDateTime)
     const formattedStartTime = new Date(startDateTime).toISOString();
+    // Get the current time in ISO format
+    const currentTime = new Date().toISOString();
 
   
     console.log('Submitted time: ', submittedTime);
@@ -89,6 +92,8 @@ const Timer: React.FC = () => {
     console.log('Typeof unformatted: ', typeof(startDateTime))
     console.log('Typeof formatted: ', typeof(formattedStartTime))
     console.log('Formatted Start time: ', formattedStartTime);
+    console.log('Current time: ', currentTime);
+
   
     try {
       const response = await fetch('/api/session', {
@@ -100,6 +105,7 @@ const Timer: React.FC = () => {
           time: submittedTime,
           email: userEmail,
           startDateTime: formattedStartTime, // Include the startDateTime in the request body
+          createdAt: currentTime,
         }),
       });
   
