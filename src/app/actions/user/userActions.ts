@@ -2,7 +2,6 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/utils/authOptions";
 import { PrismaClient } from "@prisma/client";
-import { getSession } from "next-auth/react";
 
 export default async function getCurrentUser() {
     const prisma = new PrismaClient()
