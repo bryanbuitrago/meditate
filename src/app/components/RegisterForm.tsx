@@ -71,6 +71,16 @@ const RegisterForm: React.FC = () => {
               onChange={handleUsernameChange}
             />
           </FormControl>
+          
+          <FormControl id="email">
+            <FormLabel>Email</FormLabel>
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={handleEmailChange}
+            />
+          </FormControl>
 
           <FormControl id="password">
             <FormLabel>Password</FormLabel>
@@ -82,15 +92,6 @@ const RegisterForm: React.FC = () => {
             />
           </FormControl>
 
-          <FormControl id="email">
-            <FormLabel>Email</FormLabel>
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-          </FormControl>
 
           <Button type="submit" colorScheme="blue">
             Register
