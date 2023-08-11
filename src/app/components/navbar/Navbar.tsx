@@ -12,8 +12,11 @@ function Navbar({ currentUser }) {
             <div>{currentUser?.name}</div>
 
             <div>
-                <Link href='/dashboard'>Home</Link>
                 <Link href='/meditation-journal'>Journal</Link>
+                <Link href='/journal-history'>Journal History</Link>
+                <Link href='/meditation-timer'>Timer</Link>
+                <Link href='/meditation-history'>Timer History</Link>
+                <Link href='/dashboard'>Dashboard</Link>
                 {
                     currentUser ? 
                         <button onClick={() => signOut()}>Sign out</button>
