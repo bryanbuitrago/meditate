@@ -13,7 +13,7 @@ function Navbar({ currentUser }) {
 
             <div>
                 <Link href='/meditation-journal'>Journal</Link>
-                <Link href='/journal-history'>Journal History</Link>
+                <Link href='/journals'>Journals</Link>
                 <Link href='/meditation-timer'>Timer</Link>
                 <Link href='/meditation-history'>Timer History</Link>
                 <Link href='/dashboard'>Dashboard</Link>
