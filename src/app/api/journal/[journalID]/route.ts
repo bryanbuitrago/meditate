@@ -32,3 +32,31 @@ export async function PUT(
 
             return NextResponse.json(updatedJournal)
 }
+
+
+export async function DELETE(
+    request: Request, 
+    { params }: { params: JournalIdType}
+) {
+    const prisma = new PrismaClient()
+    const user = await getCurrentUser()
+    
+    if(!user) {
+        return NextResponse.error()
+    }
+
+    const { journalID } = params
+
+    if(!journalID || journalID !== 'string') {
+        throw new Error('Invalid ID.')
+    }
+
+    const deletedJournal = await prisma.journal.deleteMany({
+        where: {
+            id: journalID,
+            userId: user.id
+        }
+    })
+
+    return NextResponse.json(deletedJournal)
+}
