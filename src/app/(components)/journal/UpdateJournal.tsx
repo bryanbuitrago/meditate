@@ -12,6 +12,7 @@ function UpdateJournal({ title, text, id }: Journal) {
     const [isEditing, setIsEditing] = useState(false);
     const [currentTitle, setCurrentTitle] = useState(title);
     const [currentText, setCurrentText] = useState(text);
+    const [message, setMessage] = useState('') // For displaying success or error messages
 
 
     const handleEditClick = () => {
@@ -27,7 +28,9 @@ function UpdateJournal({ title, text, id }: Journal) {
             text: currentText
         }
         try {
-           await axios.put(`/api/journal/${id}`, updatedJournal)  
+           const response = await axios.put(`/api/journal/${id}`, updatedJournal) 
+           setMessage('Journal updated successfully')
+           console.log('Response data :', response.data) 
             
         } catch (error: any) {
             console.error('Error updating the jorunal: ', error)
