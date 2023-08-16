@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 type Journal = {
     title: string;
@@ -13,6 +14,8 @@ function UpdateJournal({ title, text, id }: Journal) {
     const [currentTitle, setCurrentTitle] = useState(title);
     const [currentText, setCurrentText] = useState(text);
     const [message, setMessage] = useState('') // For displaying success or error messages
+
+    const router = useRouter()
 
 
     const handleEditClick = () => {
@@ -39,6 +42,20 @@ function UpdateJournal({ title, text, id }: Journal) {
 
     }
 
+    const handleDeleteClick = async () => {
+        try {
+            await axios.delete(`/api/journal/${id}`)
+            setMessage('Journal deleted successfuly!')
+            // redirect user
+            router.refresh()
+            router.push('/journals')
+            
+        } catch (error: any) {
+            console.log('Error deleting the journal: ', error)
+            setMessage('Failed to delete the journal. Please try again!')
+        }
+    }
+
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentTitle(e.target.value);
     }
@@ -61,6 +78,7 @@ function UpdateJournal({ title, text, id }: Journal) {
                     <h1>{currentTitle}</h1>
                     <p>{currentText}</p>
                     <button onClick={handleEditClick}>Update</button>
+                    <button onClick={handleDeleteClick}>Delete</button>
                 </>
             )}
         </div>
