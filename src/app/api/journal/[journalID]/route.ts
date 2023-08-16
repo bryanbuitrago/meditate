@@ -35,28 +35,29 @@ export async function PUT(
 
 
 export async function DELETE(
-    request: Request, 
-    { params }: { params: JournalIdType}
-) {
-    const prisma = new PrismaClient()
-    const user = await getCurrentUser()
-    
-    if(!user) {
-        return NextResponse.error()
-    }
+    request: Request, { params }: { 
+        params: JournalIdType}
+        ) {
+            const prisma = new PrismaClient()
 
-    const { journalID } = params
+            const user = await getCurrentUser()
+            
+            if(!user) {
+                return NextResponse.error()
+            }
 
-    if(!journalID || journalID !== 'string') {
-        throw new Error('Invalid ID.')
-    }
+            const { journalID } = params
 
-    const deletedJournal = await prisma.journal.deleteMany({
-        where: {
-            id: journalID,
-            userId: user.id
-        }
-    })
+            if(!journalID || typeof journalID !== 'string') {
+                throw new Error('Invalid ID.')
+            }
 
-    return NextResponse.json(deletedJournal)
+            const deletedJournal = await prisma.journal.deleteMany({
+                where: {
+                    id: journalID,
+                    userId: user.id
+                }
+            })
+
+            return NextResponse.json(deletedJournal)
 }
