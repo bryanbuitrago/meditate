@@ -2,7 +2,7 @@ import { Providers } from './providers'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import NextAuthSessionProvider from './providers';
-import Navbar from './components/navbar/Navbar';
+import Navbar from './(components)/navbar/Navbar';
 import getCurrentUser from './actions/user/userActions';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -26,8 +26,8 @@ export default async function RootLayout({
         <Providers>
           <NextAuthSessionProvider>
             {/* Pass current user to navbar */}
-            <Navbar currentUser={currentUser}/>
-          {children}
+            <Navbar currentUser={currentUser} />
+              {children}
           </NextAuthSessionProvider>
         </Providers>
       </body>
