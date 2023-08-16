@@ -29,16 +29,14 @@ function UpdateJournal({ title, text, id }: Journal) {
         }
         try {
            const response = await axios.put(`/api/journal/${id}`, updatedJournal) 
-           setMessage('Journal updated successfully')
+           setMessage('Journal updated successfully!')
            console.log('Response data :', response.data) 
             
         } catch (error: any) {
             console.error('Error updating the journal: ', error)
-            setMessage('Failed to update the journal. Please try again')
+            setMessage('Failed to update the journal. Please try again!')
         }
 
-
-        // Here you can handle the submission logic, like sending the updated data to an API.
     }
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
