@@ -51,6 +51,7 @@ function UpdateJournal({ title, text, id }: Journal) {
 
     return (
         <div>
+            {message && <div>{message}</div>} {/* Display the success or error messages */}
             {isEditing ? (
                 <>
                     <input type="text" value={currentTitle} onChange={handleTitleChange} />
