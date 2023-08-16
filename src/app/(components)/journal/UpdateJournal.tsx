@@ -33,7 +33,8 @@ function UpdateJournal({ title, text, id }: Journal) {
            console.log('Response data :', response.data) 
             
         } catch (error: any) {
-            console.error('Error updating the jorunal: ', error)
+            console.error('Error updating the journal: ', error)
+            setMessage('Failed to update the journal. Please try again')
         }
 
 
