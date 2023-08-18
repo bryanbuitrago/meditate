@@ -6,24 +6,24 @@ import { PrismaClient } from "@prisma/client";
 
 type MeditationTypes = {
     // user?: string
-    userId?: string
+    userID?: string
 }
 
 type IdType = {
-    meditationID?: string
+    meditationID: string
 }
 
-// Get all meditations
+// Get all meditation sessions
 export async function getMeditations(params: MeditationTypes) {
     const prisma = new PrismaClient()
     try {
 
-        const userId  = params
+        const { userID } = params
 
         let query: any = {}
 
-        if(userId) {
-            query.userId = userId
+        if(userID) {
+            query.userID = userID
         }
 
         const meditations = await prisma.meditation.findMany({
