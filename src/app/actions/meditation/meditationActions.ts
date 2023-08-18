@@ -76,3 +76,19 @@ export async function getMeditationByID(params: IdType) {
     }
     
 }
+
+// Get Last meditation session
+export async function getLastMeditationSession() {
+    const prisma = new PrismaClient()
+    try {
+        const lastMeditation = prisma.meditation.findFirst({
+            orderBy: {
+                createdAt: 'desc'
+            }
+        })
+        return lastMeditation
+    } catch (error: any) {
+        console.log('Error fetching the last meditation session: ', error)
+        return null
+    }
+}
