@@ -1,4 +1,6 @@
 import { getMeditationByID } from "@/app/actions/meditation/meditationActions";
+import SingleMeditation from "@/app/(components)/meditation/SingleMeditation";
+
 
 
 
@@ -7,19 +9,21 @@ type MeditationType = {
 }
 
 
-async function SingleMeditation({ params } : { params: MeditationType }) {
+async function SingleMeditationPage({ params } : { params: MeditationType }) {
 
 const meditation = await getMeditationByID(params)
 
 console.log(meditation)
 
     return (
-        <div>
-            Single Meditation Page
-            <h1>time: {meditation?.time}</h1>
-            <p>Started at: {meditation?.startDateTime.toISOString()}</p>
-        </div>
+        <SingleMeditation meditation={meditation} />
+        // === Version 1.0 ===
+        // <div>
+        //     Single Meditation Page
+        //     <h1>time: {formatDuration(meditation?.time)}</h1>
+        //     <p>Started at: {meditation?.startDateTime.toISOString()}</p>
+        // </div>
     );
 }
 
-export default SingleMeditation;
+export default SingleMeditationPage;
