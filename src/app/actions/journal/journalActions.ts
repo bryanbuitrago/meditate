@@ -70,3 +70,20 @@ export async function getJournalByID(params: IdType) {
     }
     
 }
+
+// Get last submitted journal
+export async function getLastSubmittedJournal() {
+    const prisma = new PrismaClient()
+
+    try {
+        const lastJournal = await prisma.journal.findFirst({
+            orderBy: {
+                createdAt: 'desc'
+            }
+        })
+        return lastJournal
+    } catch (error: any) {
+        console.log('Error fetching the last submitted journal: ', error)
+    }
+    
+}
