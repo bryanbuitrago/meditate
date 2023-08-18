@@ -8,10 +8,13 @@ async function JourneyPage() {
 
 // Server Route protection
   const session = await getServerSession(authOptions)
+  console.log('[Session] = ', session)
 
-  const { userId } = session?.user
+  const { id } = session?.user
 
-  const meditationEntries = await getMeditations(userId)
+  console.log('User ID ', id)
+
+  const meditationEntries = await getMeditations(id)
 
   console.log('Meditations Data', meditationEntries)
 
