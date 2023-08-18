@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import JournalForm from '../(components)/JournalForm';
+import JournalForm from '../(components)/journal/JournalForm';
 import LoadingSpinner from '../(components)/LoadingSpinner';
 
 function JournalPage() {
