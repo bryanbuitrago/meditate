@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/utils/authOptions";
-import { PrismaClient } from "@prisma/client";
+import prisma from '../../../lib/prismadb'
 // import { getSession } from "next-auth/react";
 
 type JournalTypes = {
@@ -15,7 +15,7 @@ type IdType = {
 
 // Get all journals
 export async function getJournals(params: JournalTypes) {
-    const prisma = new PrismaClient()
+
     try {
 
         const userId  = params
@@ -48,7 +48,7 @@ export async function getJournals(params: JournalTypes) {
 
 // Get a single journal
 export async function getJournalByID(params: IdType) {
-    const prisma = new PrismaClient()
+
     try {
         const { journalID } = params
 
@@ -73,7 +73,6 @@ export async function getJournalByID(params: IdType) {
 
 // Get last submitted journal
 export async function getLastSubmittedJournal() {
-    const prisma = new PrismaClient()
 
     try {
         const lastJournal = await prisma.journal.findFirst({

@@ -1,8 +1,9 @@
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/utils/authOptions";
-import { PrismaClient } from "@prisma/client";
-// import { getSession } from "next-auth/react";
+
+import prisma from '../../../lib/prismadb'
+
 
 type MeditationTypes = {
     // user?: string
@@ -15,7 +16,7 @@ type IdType = {
 
 // Get all meditation sessions
 export async function getMeditations(params: MeditationTypes) {
-    const prisma = new PrismaClient()
+
     try {
 
         const { userID } = params
@@ -48,7 +49,7 @@ export async function getMeditations(params: MeditationTypes) {
 
 // Get a single meditation
 export async function getMeditationByID(params: IdType) {
-    const prisma = new PrismaClient()
+
     try {
         const { meditationID } = params
 
@@ -79,7 +80,7 @@ export async function getMeditationByID(params: IdType) {
 
 // Get Last meditation session
 export async function getLastMeditationSession() {
-    const prisma = new PrismaClient()
+    
     try {
         const lastMeditation = prisma.meditation.findFirst({
             orderBy: {

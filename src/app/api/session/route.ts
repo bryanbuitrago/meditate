@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { PrismaClient } from "@prisma/client";
+
+import prisma from '../../../lib/prismadb'
 import { format, parse} from "date-fns";
 
 
@@ -11,7 +12,7 @@ type SessionFieldTypes = {
 };
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  const prisma = new PrismaClient();
+
 
   const { time, startDateTime, email }: SessionFieldTypes = await req.json();
   console.log('startDateTime= ', startDateTime)

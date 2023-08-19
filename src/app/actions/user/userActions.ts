@@ -1,10 +1,10 @@
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/utils/authOptions";
-import { PrismaClient } from "@prisma/client";
+import prisma from '../../../lib/prismadb'
 
 export default async function getCurrentUser() {
-    const prisma = new PrismaClient()
+
     try {
         const serverSession = await getServerSession(authOptions)
 

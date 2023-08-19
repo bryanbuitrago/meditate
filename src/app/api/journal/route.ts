@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { PrismaClient } from "@prisma/client";
+
+import prisma from '../../../lib/prismadb'
 
 type JournalFieldTypes = {
   title: string;
@@ -8,7 +9,7 @@ type JournalFieldTypes = {
 };
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  const prisma = new PrismaClient();
+
 
   const { title, text, email }: JournalFieldTypes = await req.json();
 
@@ -35,10 +36,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       where: { email },
       include: { journals: true }
     })
-
-    // const { journals } = user
-
-
+    
     console.log(journalEntry)
     console.log('=================')
     console.log(user?.journals)
