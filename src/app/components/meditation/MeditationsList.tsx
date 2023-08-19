@@ -1,11 +1,7 @@
 'use client'
 import { Box, LinkBox, LinkOverlay, Heading } from "@chakra-ui/react";
 import Link from "next/link";
-// import formatDuration from "@/utils/timerUtils";
-// import formatDate from "@/utils/dateTimeUtils";
 import { _formatDate, _formatDuration } from "@/utils/dateTimeUtils";
-
-
 
 function MeditationSessionList({ meditations }) {
     return (
@@ -19,7 +15,6 @@ function MeditationSessionList({ meditations }) {
                 </Heading>
                 <Heading as="h5" size="sm" mt={2}>
                 On this date: {_formatDate(meditation.createdAt)}
-                  {/* On this date: {new Date(meditation.createdAt).toLocaleDateString()} */}
                 </Heading>
               </LinkOverlay>
             </Link>
