@@ -142,27 +142,6 @@ function SingleJournal({ title, text, id }: Journal) {
           </Box>
         </Flex>
       );
-
-    // === VErsion 1.0 ===
-    // return (
-    //     <div>
-    //         {message && <div>{message}</div>} {/* Display the success or error messages */}
-    //         {isEditing ? (
-    //             <>
-    //                 <input type="text" value={currentTitle} onChange={handleTitleChange} />
-    //                 <textarea value={currentText} onChange={handleTextChange}></textarea>
-    //                 <button onClick={handleSubmitClick}>Submit</button>
-    //             </>
-    //         ) : (
-    //             <>
-    //                 <h1>{currentTitle}</h1>
-    //                 <p>{currentText}</p>
-    //                 <button onClick={handleEditClick}>Update</button>
-    //                 <button onClick={handleDeleteClick}>Delete</button>
-    //             </>
-    //         )}
-    //     </div>
-    // )
 }
 
 export default SingleJournal;
