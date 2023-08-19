@@ -6,14 +6,9 @@ import { getLastSubmittedJournal } from "../actions/journal/journalActions";
 import { getLastMeditationSession } from "../actions/meditation/meditationActions";
 
 async function DashBoardPage() {
+    
     const journal = await getLastSubmittedJournal()
     const meditation = await getLastMeditationSession()
-
-
-    console.log('[Journal from DB]= ', journal)
-    console.log('[Meditation from DB= ', meditation)
-
-
     const { title, text, id } = journal
 
     return (
