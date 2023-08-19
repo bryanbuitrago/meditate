@@ -1,4 +1,4 @@
-import UpdateJournal from "../journal/UpdateJournal";
+import UpdateJournal from "../journal/SingleJournal";
 
 function DashBoard() {
     return (

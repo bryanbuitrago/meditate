@@ -20,7 +20,7 @@ type Journal = {
     id: string
 }
 
-function UpdateJournal({ title, text, id }: Journal) {
+function SingleJournal({ title, text, id }: Journal) {
     const [isEditing, setIsEditing] = useState(false);
     const [currentTitle, setCurrentTitle] = useState(title);
     const [currentText, setCurrentText] = useState(text);
@@ -165,4 +165,4 @@ function UpdateJournal({ title, text, id }: Journal) {
     // )
 }
 
-export default UpdateJournal;
+export default SingleJournal;

@@ -1,8 +1,6 @@
 // === 2nd Version ===
-
-import SingleJournal from "@/app/components/journal/SingleJournal";
 import { getJournalByID } from "@/app/actions/journal/journalActions";
-import UpdateJournal from "@/app/components/journal/SingleJournal";
+import SingleJournal from "@/app/components/journal/SingleJournal";
 
 type JournalType = {
     journalID: string;
@@ -14,7 +12,7 @@ async function SingleJournalPage({ params } : {params: JournalType} ) {
     const { title, text, id } = journal
     return (
         // <SingleJournal title={title} text={text}/>
-        <UpdateJournal title={title} text={text} id={id} />
+        <SingleJournal title={title} text={text} id={id} />
 
     )
 }
