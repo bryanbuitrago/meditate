@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import styles from './page.module.css'
-import HomePageGreeting from './(components)/HomePageGreeting';
+import HomePageGreeting from './components/HomePageGreeting';
 
 export default function Home() {
   return (
