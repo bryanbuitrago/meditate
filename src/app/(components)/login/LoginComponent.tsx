@@ -42,7 +42,7 @@ function LoginComponentCard({onSubmit, onChange, email, password}) {
                 </Button>
 
                 <Text textAlign="center">
-                    Don't have an account ?
+                    Don&apos;t have an account ?
                     <NextLink href="/register" passHref>
                         <Link ml={2} color={useColorModeValue('blue.600', 'blue.300')}>Sign up</Link>
                     </NextLink>
