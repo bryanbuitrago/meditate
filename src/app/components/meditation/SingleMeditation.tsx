@@ -26,7 +26,6 @@ function SingleMeditation({ meditation }) {
                     time: {_formatDuration(meditation?.time)}
                 </Heading>
                 <Text fontSize="md">
-                    {/* Started at: {meditation?.startDateTime.toISOString()} */}
                     Started at: {_formatDate(meditation?.startDateTime)}
                 </Text>
             </Box>
