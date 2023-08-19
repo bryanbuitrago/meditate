@@ -25,8 +25,8 @@ export default async function RootLayout({
       <body>
         <Providers>
           <NextAuthSessionProvider>
-            {/* Pass current user to navbar */}
-            <Navbar currentUser={currentUser} />
+            {/* Show Navbar only if user is logged in*/}
+            {currentUser && <Navbar currentUser={currentUser} />}
               {children}
           </NextAuthSessionProvider>
         </Providers>
