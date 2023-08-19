@@ -2,7 +2,7 @@
 
 import SingleJournal from "@/app/components/journal/SingleJournal";
 import { getJournalByID } from "@/app/actions/journal/journalActions";
-import UpdateJournal from "@/app/components/journal/UpdateJournal";
+import UpdateJournal from "@/app/components/journal/SingleJournal";
 
 type JournalType = {
     journalID: string;
