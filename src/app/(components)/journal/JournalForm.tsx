@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
-import { Box, Button, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, Textarea, Heading, Flex } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 
 interface FormValues {
@@ -7,7 +7,8 @@ interface FormValues {
   text: string;
 }
 
-const JournalForm: React.FC = () => {
+// const JournalForm: React.FC = () => {
+function JournalForm() {
   const [formValues, setFormValues] = useState<FormValues>({
     title: '',
     text: ''
@@ -60,36 +61,43 @@ const JournalForm: React.FC = () => {
   };
 
   return (
-    <Box maxWidth="md" mx="auto" mt={8} p={4}>
-      <form onSubmit={handleSubmit}>
-        <FormControl id="title">
-          <FormLabel>Title</FormLabel>
-          <Input
-            type="text"
-            name="title"
-            placeholder="Enter the title"
-            value={formValues.title}
-            onChange={handleChange}
-          />
-        </FormControl>
+<Box maxWidth="md" mx="auto" mt={8} p={4} borderWidth="1px" borderRadius="lg" boxShadow="lg">
+  <Heading as="h2" size="lg" textAlign="center" mb={4}>
+    Journal
+  </Heading>
+  <form onSubmit={handleSubmit}>
+    <FormControl id="title">
+      <FormLabel>Title</FormLabel>
+      <Input
+        type="text"
+        name="title"
+        placeholder="Enter the title"
+        value={formValues.title}
+        onChange={handleChange}
+      />
+    </FormControl>
 
-        <FormControl id="text" mt={4}>
-          <FormLabel>Text</FormLabel>
-          <Textarea
-            name="text"
-            placeholder="Enter the text"
-            value={formValues.text}
-            onChange={handleChange}
-            resize="vertical"
-            h="10rem"
-          />
-        </FormControl>
+    <FormControl id="text" mt={4}>
+      <FormLabel>Text</FormLabel>
+      <Textarea
+        name="text"
+        placeholder="Enter the text"
+        value={formValues.text}
+        onChange={handleChange}
+        resize="vertical"
+        h="10rem"
+      />
+    </FormControl>
 
-        <Button type="submit" colorScheme="blue" mt={4}>
-          Submit
-        </Button>
-      </form>
-    </Box>
+    <Flex justifyContent="center" mt={4}>
+      <Button type="submit" colorScheme="blue">
+        Submit
+      </Button>
+    </Flex>
+  </form>
+</Box>
+
+
   );
 };
 
