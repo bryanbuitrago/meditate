@@ -1,5 +1,3 @@
-import UpdateJournal from "../journal/SingleJournal";
-
 function DashBoard() {
     return (
         <div>
