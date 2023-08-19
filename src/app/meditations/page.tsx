@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/utils/authOptions"
 import { getMeditations } from "../actions/meditation/meditationActions"
-import MeditationSessionList from "../(components)/meditation/MeditationsList"
+import MeditationSessionList from "../components/meditation/MeditationsList"
 
 
 async function JourneyPage() {

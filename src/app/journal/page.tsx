@@ -2,8 +2,8 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import JournalForm from '../(components)/journal/JournalForm';
-import LoadingSpinner from '../(components)/LoadingSpinner';
+import JournalForm from '../components/journal/JournalForm';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 function JournalPage() {
   // const { data: session, status } = useSession();

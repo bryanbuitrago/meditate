@@ -1,5 +1,5 @@
 import { getMeditationByID } from "@/app/actions/meditation/meditationActions";
-import SingleMeditation from "@/app/(components)/meditation/SingleMeditation";
+import SingleMeditation from "@/app/components/meditation/SingleMeditation";
 
 
 

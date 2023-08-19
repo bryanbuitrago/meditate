@@ -1,12 +1,12 @@
 // === SECOND VERSION ===
 'use client'
 
-import Input from "../(components)/input/Input"
+import Input from "../components/input/Input"
 import { FormEvent, useState } from "react"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import RegisterComponentCard from "../(components)/register/RegisterComponent"
+import RegisterComponentCard from "../components/register/RegisterComponent"
 
 type InitialStateProps = {
     name: string,

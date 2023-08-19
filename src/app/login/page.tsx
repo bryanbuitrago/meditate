@@ -1,14 +1,12 @@
 // === SECOND VERSION ===
-// === SECOND VERSION ===
 'use client'
 
-import Input from "../(components)/input/Input"
 import { FormEvent, useState } from "react"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { signIn } from "next-auth/react"
-import LoginComponentCard from "../(components)/login/LoginComponent"
+import LoginComponentCard from "../components/login/LoginComponent"
 
 type InitialStateProps = {
     email: string,
@@ -20,7 +18,7 @@ const initialState = {
     password: ''
 }
 
-export default function page() {
+export default function LoginPage() {
 
     const [state, setState] = useState(initialState)
     const router = useRouter()

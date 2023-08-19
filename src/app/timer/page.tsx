@@ -1,6 +1,6 @@
 'use client'
 
-import Timer from '../(components)/Timer';
+import Timer from '../components/Timer';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
