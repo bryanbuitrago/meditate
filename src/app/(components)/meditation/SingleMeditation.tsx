@@ -1,6 +1,6 @@
 'use client'
 import { Box, Heading, Text, Flex } from "@chakra-ui/react";
-import formatDuration from "@/utils/timerUtils";
+import {_formatDuration, _formatDate } from "@/utils/dateTimeUtils";
 
 function SingleMeditation({ meditation }) {
     return (
@@ -23,10 +23,11 @@ function SingleMeditation({ meditation }) {
                     Single Meditation Page
                 </Text>
                 <Heading as="h1" size="lg" my={4}>
-                    time: {formatDuration(meditation?.time)}
+                    time: {_formatDuration(meditation?.time)}
                 </Heading>
                 <Text fontSize="md">
-                    Started at: {meditation?.startDateTime.toISOString()}
+                    {/* Started at: {meditation?.startDateTime.toISOString()} */}
+                    Started at: {_formatDate(meditation?.startDateTime)}
                 </Text>
             </Box>
         </Flex>
