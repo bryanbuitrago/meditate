@@ -1,6 +1,6 @@
 import { get } from "http";
 import DashBoard from "../components/dashboard/DashBoard";
-import UpdateJournal from '../components/journal/UpdateJournal';
+import UpdateJournal from '../components/journal/SingleJournal';
 import SingleMeditation from "../components/meditation/SingleMeditation";
 import { getLastSubmittedJournal } from "../actions/journal/journalActions";
 import { getLastMeditationSession } from "../actions/meditation/meditationActions";
