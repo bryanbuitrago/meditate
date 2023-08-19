@@ -7,7 +7,6 @@ interface FormValues {
   text: string;
 }
 
-// const JournalForm: React.FC = () => {
 function JournalForm() {
   const [formValues, setFormValues] = useState<FormValues>({
     title: '',
@@ -61,43 +60,41 @@ function JournalForm() {
   };
 
   return (
-<Box maxWidth="md" mx="auto" mt={8} p={4} borderWidth="1px" borderRadius="lg" boxShadow="lg">
-  <Heading as="h2" size="lg" textAlign="center" mb={4}>
-    Journal
-  </Heading>
-  <form onSubmit={handleSubmit}>
-    <FormControl id="title">
-      <FormLabel>Title</FormLabel>
-      <Input
-        type="text"
-        name="title"
-        placeholder="Enter the title"
-        value={formValues.title}
-        onChange={handleChange}
-      />
-    </FormControl>
+      <Box maxWidth="md" mx="auto" mt={8} p={4} borderWidth="1px" borderRadius="lg" boxShadow="lg">
+        <Heading as="h2" size="lg" textAlign="center" mb={4}>
+          Journal
+        </Heading>
+        <form onSubmit={handleSubmit}>
+          <FormControl id="title">
+            <FormLabel>Title</FormLabel>
+            <Input
+              type="text"
+              name="title"
+              placeholder="Enter the title"
+              value={formValues.title}
+              onChange={handleChange}
+            />
+          </FormControl>
 
-    <FormControl id="text" mt={4}>
-      <FormLabel>Text</FormLabel>
-      <Textarea
-        name="text"
-        placeholder="Enter the text"
-        value={formValues.text}
-        onChange={handleChange}
-        resize="vertical"
-        h="10rem"
-      />
-    </FormControl>
+          <FormControl id="text" mt={4}>
+            <FormLabel>Text</FormLabel>
+            <Textarea
+              name="text"
+              placeholder="Enter the text"
+              value={formValues.text}
+              onChange={handleChange}
+              resize="vertical"
+              h="10rem"
+            />
+          </FormControl>
 
-    <Flex justifyContent="center" mt={4}>
-      <Button type="submit" colorScheme="blue">
-        Submit
-      </Button>
-    </Flex>
-  </form>
-</Box>
-
-
+          <Flex justifyContent="center" mt={4}>
+            <Button type="submit" colorScheme="blue">
+              Submit
+            </Button>
+          </Flex>
+        </form>
+      </Box>
   );
 };
 
