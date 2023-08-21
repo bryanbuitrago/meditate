@@ -22,14 +22,14 @@ async function SingleJournalPage({ params } : {params: ParamsJournalID} ) {
     }
 
     // Format the createdAt Date object to a string
-    const formatCreatedAt = journal.createdAt.toISOString()
+    const createdAtStringFormat = journal.createdAt.toISOString()
     return (
 
         <SingleJournal 
             title={journal.title} 
             text={journal.text} 
             id={journal.id} 
-            createdAt={formatCreatedAt} 
+            createdAt={createdAtStringFormat} 
         />
     )
 }
