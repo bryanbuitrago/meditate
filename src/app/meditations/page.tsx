@@ -4,7 +4,7 @@ import { getMeditations } from "../actions/meditation/meditationActions"
 import MeditationSessionList from "../components/meditation/MeditationsList"
 
 
-async function JourneyPage() {
+async function MeditationsPage() {
 
 // Server Route protection
   const session = await getServerSession(authOptions)
@@ -12,21 +12,15 @@ async function JourneyPage() {
 
   const { id } = session?.user
 
-  console.log('User ID ', id)
-
   const meditationEntries = await getMeditations(id)
 
   console.log('Meditations Data', meditationEntries)
 
   return ( 
-      <div>
-
-          <h1>Meditation Journey Page/History </h1>
-          <MeditationSessionList meditations={meditationEntries} />
-      </div>
+     <MeditationSessionList meditations={meditationEntries} />
   );
 }
 
-export default JourneyPage;
+export default MeditationsPage;
 
 
