@@ -35,7 +35,7 @@ function SingleJournal({ title, text, createdAt, id }: Journal) {
         setIsEditing(true);
     }
 
-    const handleSubmitClick = async (e) => {
+    const handleSubmitClick = async (e: React.MouseEvent) => {
         e.preventDefault()
         setIsEditing(false)
 
