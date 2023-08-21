@@ -1,7 +1,8 @@
 'use client'
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { _formatDate } from '@/utils/dateTimeUtils';
 import {
     Box,
     Button,
@@ -15,12 +16,13 @@ import {
   } from "@chakra-ui/react";
 
 type Journal = {
-    title: string;
-    text: string;
+    title: string
+    text: string
+    createdAt: string
     id: string
 }
 
-function SingleJournal({ title, text, id }: Journal) {
+function SingleJournal({ title, text, createdAt, id }: Journal) {
     const [isEditing, setIsEditing] = useState(false);
     const [currentTitle, setCurrentTitle] = useState(title);
     const [currentText, setCurrentText] = useState(text);
@@ -76,24 +78,29 @@ function SingleJournal({ title, text, id }: Journal) {
     }
 
     return (
-        <Flex
-          height="100vh"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Box
-            borderWidth="1px"
-            borderRadius="md"
-            padding={20}  // Increased padding
-            shadow="xl"  // Bigger shadow for emphasis
-            maxWidth="2500px"  // Increased the maxWidth
-          >
-            {message && (
-              <Alert status="info" marginBottom="8">
-                <AlertIcon />
-                {message}
-              </Alert>
-            )}
+<Flex
+  height="100vh"
+  alignItems="center"
+  justifyContent="center"
+>
+  <Box
+    borderWidth="1px"
+    borderRadius="md"
+    padding={20}
+    shadow="xl"
+    maxWidth="2500px"
+  >
+    {/* New Journal Heading */}
+    <Heading as="h2" size="xl" marginBottom="8">
+      Journal
+    </Heading>
+
+    {message && (
+      <Alert status="info" marginBottom="8">
+        <AlertIcon />
+        {message}
+      </Alert>
+    )}
       
             {isEditing ? (
               <>
@@ -126,6 +133,10 @@ function SingleJournal({ title, text, id }: Journal) {
                   {currentTitle}
                 </Heading>
                 <Text fontSize="2xl" marginBottom="8">{currentText}</Text>
+                  {/* Display Date and Time */}
+                 <Text fontSize="lg" color="gray.600" marginBottom="4">
+                  {_formatDate(createdAt)}
+                </Text>
                 <Button
                   colorScheme="teal"
                   onClick={handleEditClick}
