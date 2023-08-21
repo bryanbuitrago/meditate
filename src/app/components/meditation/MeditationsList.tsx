@@ -3,7 +3,13 @@ import { Box, LinkBox, LinkOverlay, Heading } from "@chakra-ui/react";
 import Link from "next/link";
 import { _formatDate, _formatDuration } from "@/utils/dateTimeUtils";
 
-function MeditationSessionList({ meditations }) {
+type Meditation = {
+  id: number
+  time: number
+  createdAt: string
+}
+
+function MeditationSessionList({ meditations }: { meditations: Meditation[] }) {
     return (
       <Box as="ul">
         {meditations.map(meditation => (
