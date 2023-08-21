@@ -1,7 +1,48 @@
+'use client'
+
+import { FormEvent, useState } from "react"
+import axios from "axios"
+import { useRouter } from "next/navigation"
 import { Box, Flex, FormControl, FormLabel, Input, Button, Link, useColorModeValue, Heading } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-function RegisterComponentCard({onSubmit, onChange, name, email, password}) {
+type InitialStateTypes = {
+    name: string,
+    email: string,
+    password: string
+}
+
+const initialState: InitialStateTypes = {
+    name: '',
+    email: '',
+    password: ''
+}
+
+function RegisterComponentCard() {
+    
+    const [state, setState] = useState(initialState)
+
+    const router = useRouter()
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setState({...state, [e.target.name]: e.target.value })
+    }
+
+    function onSubmit(event: FormEvent) {
+        event.preventDefault()
+        axios.post('/api/register', state)
+        .then(() => {
+            router.refresh()
+        })
+        .then(() => {
+            setTimeout(() => {
+                router.push('/login')
+            }, 2500)
+        })
+        .catch((error: any) =>{
+            console.log('Error during registration: ', error)
+        })
+    }
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
             <Box 
@@ -21,8 +62,8 @@ function RegisterComponentCard({onSubmit, onChange, name, email, password}) {
                         placeholder="Name" 
                         name="name" 
                         type="text" 
-                        onChange={onChange} 
-                        value={name} 
+                        onChange={handleChange} 
+                        value={state.name} 
                     />
                 </FormControl>
 
@@ -32,8 +73,8 @@ function RegisterComponentCard({onSubmit, onChange, name, email, password}) {
                         placeholder="Email" 
                         name="email" 
                         type="email" 
-                        onChange={onChange} 
-                        value={email} 
+                        onChange={handleChange} 
+                        value={state.email} 
                     />
                 </FormControl>
 
@@ -43,8 +84,8 @@ function RegisterComponentCard({onSubmit, onChange, name, email, password}) {
                         placeholder="Password" 
                         name="password" 
                         type="password" 
-                        onChange={onChange} 
-                        value={password} 
+                        onChange={handleChange} 
+                        value={state.password} 
                     />
                 </FormControl>
 
