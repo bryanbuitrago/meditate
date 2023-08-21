@@ -2,22 +2,34 @@
 import { getJournalByID } from "@/app/actions/journal/journalActions";
 import SingleJournal from "@/app/components/journal/SingleJournal";
 
-type JournalType = {
+type ParamsJournalID = {
     journalID: string;
 }
 
-async function SingleJournalPage({ params } : {params: JournalType} ) {
+type Journal = {
+    id: string
+    title: string
+    text: string
+    createdAt: Date
+}
 
-    const journal = await getJournalByID(params)
-    console.log(journal)
-    const { title, text, id, createdAt } = journal
+async function SingleJournalPage({ params } : {params: ParamsJournalID} ) {
+
+    const journal: Journal | null = await getJournalByID(params)
+
+    if(!journal) {
+        return <div>Loading or error message... </div>
+    }
+
+    // Format the createdAt Date object to a string
+    const formatCreatedAt = journal.createdAt.toISOString()
     return (
 
         <SingleJournal 
-            title={title} 
-            text={text} 
-            id={id} 
-            createdAt={createdAt} 
+            title={journal.title} 
+            text={journal.text} 
+            id={journal.id} 
+            createdAt={formatCreatedAt} 
         />
     )
 }
