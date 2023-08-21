@@ -78,30 +78,29 @@ function SingleJournal({ title, text, createdAt, id }: Journal) {
     }
 
     return (
-<Flex
-  height="100vh"
-  alignItems="center"
-  justifyContent="center"
->
-  <Box
-    borderWidth="1px"
-    borderRadius="md"
-    padding={20}
-    shadow="xl"
-    maxWidth="2500px"
-  >
-    {/* New Journal Heading */}
-    <Heading as="h2" size="xl" marginBottom="8">
-      Journal
-    </Heading>
+        <Flex
+          height="100vh"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box
+            borderWidth="1px"
+            borderRadius="md"
+            padding={20}
+            shadow="xl"
+            maxWidth="2500px"
+          >
+          <Heading as="h2" size="xl" textAlign="center" marginBottom="8"> {/* Added textAlign */}
+              Journal
+          </Heading>
 
-    {message && (
-      <Alert status="info" marginBottom="8">
-        <AlertIcon />
-        {message}
-      </Alert>
-    )}
-      
+            {message && (
+              <Alert status="info" marginBottom="8">
+                <AlertIcon />
+                {message}
+              </Alert>
+            )}
+
             {isEditing ? (
               <>
                 <Input
@@ -130,12 +129,14 @@ function SingleJournal({ title, text, createdAt, id }: Journal) {
             ) : (
               <>
                 <Heading as="h1" size="2xl" marginBottom="8">
-                  {currentTitle}
+                  Title: {currentTitle}
                 </Heading>
-                <Text fontSize="2xl" marginBottom="8">{currentText}</Text>
+                <Text fontSize="2xl" marginBottom="8">
+                  Text: {currentText}
+                </Text>
                   {/* Display Date and Time */}
-                 <Text fontSize="lg" color="gray.600" marginBottom="4">
-                  {_formatDate(createdAt)}
+                <Text fontSize="lg" color="gray.600" marginBottom="4">
+                  Created: {_formatDate(createdAt)}
                 </Text>
                 <Button
                   colorScheme="teal"
