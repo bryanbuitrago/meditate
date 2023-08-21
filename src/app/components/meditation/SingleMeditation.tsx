@@ -5,9 +5,10 @@ import {_formatDuration, _formatDate } from "@/utils/dateTimeUtils";
 type Meditation = {
     time: number
     startDateTime: string
+    createdAt: string
 }
 
-function SingleMeditation({ meditation }: {meditation:  Meditation}) {
+function SingleMeditation({ time, startDateTime, createdAt }: Meditation) {
     return (
         <Flex 
             width="100vw" 
@@ -28,10 +29,13 @@ function SingleMeditation({ meditation }: {meditation:  Meditation}) {
                     Single Meditation Page
                 </Text>
                 <Heading as="h1" size="lg" my={4}>
-                    time: {_formatDuration(meditation?.time)}
+                    time: {_formatDuration(time)}
                 </Heading>
                 <Text fontSize="md">
-                    Started at: {_formatDate(meditation?.startDateTime)}
+                    Started at: {_formatDate(startDateTime)}
+                </Text>
+                <Text fontSize="lg" color="gray.600" marginBottom="4">
+                  Created: {_formatDate(createdAt)}
                 </Text>
             </Box>
         </Flex>
