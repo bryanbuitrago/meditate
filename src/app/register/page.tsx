@@ -1,7 +1,5 @@
 import RegisterComponentCard from "../components/register/RegisterComponent"
 
-
-
 function RegisterPage() {
 
     return (
