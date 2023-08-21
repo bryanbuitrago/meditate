@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Textarea, Heading, Flex } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
