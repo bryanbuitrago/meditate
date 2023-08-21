@@ -1,11 +1,7 @@
-import { getServerSession } from "next-auth";
-
-import { authOptions } from "@/utils/authOptions";
 import prisma from '../../../lib/prismadb'
-// import { getSession } from "next-auth/react";
+
 
 type JournalTypes = {
-    // user?: string
     userId?: string
 }
 

@@ -1,12 +1,7 @@
-import { getServerSession } from "next-auth";
-
-import { authOptions } from "@/utils/authOptions";
-
 import prisma from '../../../lib/prismadb'
 
 
 type MeditationTypes = {
-    // user?: string
     userID?: string
 }
 
@@ -66,10 +61,7 @@ export async function getMeditationByID(params: IdType) {
             return null
         }
 
-        return {
-            ...meditation,
-            createdAt: meditation.createdAt.toString()
-        }
+        return meditation
         
     }
     catch( error: any) {
