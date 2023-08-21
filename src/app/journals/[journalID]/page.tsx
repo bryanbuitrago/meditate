@@ -9,10 +9,16 @@ type JournalType = {
 async function SingleJournalPage({ params } : {params: JournalType} ) {
 
     const journal = await getJournalByID(params)
-    const { title, text, id } = journal
+    console.log(journal)
+    const { title, text, id, createdAt } = journal
     return (
 
-        <SingleJournal title={title} text={text} id={id} />
+        <SingleJournal 
+            title={title} 
+            text={text} 
+            id={id} 
+            createdAt={createdAt} 
+        />
     )
 }
 export default SingleJournalPage
