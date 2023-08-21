@@ -4,12 +4,12 @@ import SingleMeditation from "@/app/components/meditation/SingleMeditation";
 
 
 
-type MeditationType = {
+type ParamsMeditationID = {
     meditationID: string
 }
 
 
-async function SingleMeditationPage({ params } : { params: MeditationType }) {
+async function SingleMeditationPage({ params } : { params: ParamsMeditationID }) {
 
 const meditation = await getMeditationByID(params)
 
