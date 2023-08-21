@@ -2,7 +2,12 @@
 import { Box, Heading, Text, Flex } from "@chakra-ui/react";
 import {_formatDuration, _formatDate } from "@/utils/dateTimeUtils";
 
-function SingleMeditation({ meditation }) {
+type Meditation = {
+    time: number
+    startDateTime: string
+}
+
+function SingleMeditation({ meditation }: {meditation:  Meditation}) {
     return (
         <Flex 
             width="100vw" 
