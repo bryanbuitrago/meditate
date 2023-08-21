@@ -1,7 +1,51 @@
+'use client'
+
+import { FormEvent, useState } from "react"
+import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 import { Box, Flex, FormControl, FormLabel, Input, Button, Link, Text, useColorModeValue, Heading } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-function LoginComponentCard({onSubmit, onChange, email, password}) {
+
+type InitialStateProps = {
+    email: string
+    password: string
+}
+
+const initialState: InitialStateProps = {
+    email: '',
+    password: ''
+}
+
+function LoginComponentCard() {
+    
+    const [state, setState] = useState(initialState)
+    const router = useRouter()
+
+    function handleChange(event: any) {
+        setState({...state, [event.target.name]: event.target.value })
+        console.log(event.target.value)
+    }
+
+    function onSubmit(event: FormEvent) {
+        event.preventDefault()
+
+        signIn('credentials', {
+            ...state,
+            redirect: false,
+        })
+        .then((callback) => {
+
+            if(callback?.ok) {
+                router.refresh()
+            }
+
+            if(callback?.error) {
+                throw new Error('Wrong Credentials')
+            }
+            router.push('/dashboard')
+        })
+    }
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
             <Box 
@@ -21,8 +65,8 @@ function LoginComponentCard({onSubmit, onChange, email, password}) {
                         placeholder="Email" 
                         name="email" 
                         type="email" 
-                        onChange={onChange} 
-                        value={email} 
+                        onChange={handleChange} 
+                        value={state.email} 
                     />
                 </FormControl>
 
@@ -32,8 +76,8 @@ function LoginComponentCard({onSubmit, onChange, email, password}) {
                         placeholder="Password" 
                         name="password" 
                         type="password" 
-                        onChange={onChange} 
-                        value={password} 
+                        onChange={handleChange} 
+                        value={state.password} 
                     />
                 </FormControl>
 
