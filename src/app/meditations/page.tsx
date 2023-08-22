@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/utils/authOptions"
 import { getMeditations } from "../actions/meditation/meditationActions"
-// import MeditationSessionList from "../components/meditation/MeditationsList"
 import MeditationsList from "../components/meditation/MeditationsList"
 
 
@@ -12,6 +11,7 @@ async function MeditationsPage() {
   console.log('[Session] = ', session)
 
   const { id } = session?.user
+  
 
   const meditationEntries = await getMeditations(id)
 
