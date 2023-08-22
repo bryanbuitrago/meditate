@@ -2,8 +2,19 @@
 
 import { Box, LinkBox, LinkOverlay, Heading, Text } from "@chakra-ui/react";
 import Link from "next/link";
+import { _formatDate } from "@/utils/dateTimeUtils";
 
-function JournalsList({ journals }) {
+type Journal = {
+  id: string 
+  title: string 
+  text: string
+  createdAt: string
+}
+
+type JournalList = {
+  journals: Journal[]
+}
+function JournalsList({ journals }: JournalList) {
   return (
     <Box as="ul">
       {journals.map(entry => (
@@ -16,6 +27,9 @@ function JournalsList({ journals }) {
               <Text mt={2}>
                 Text: {entry.text}
               </Text>
+              <Text fontSize="lg" color="gray.600" marginBottom="4">
+                  Created: {_formatDate(entry.createdAt)}
+                </Text>
             </LinkOverlay>
           </Link>
         </LinkBox>
