@@ -1,8 +1,8 @@
 import prisma from '../../../lib/prismadb'
 
 
-type JournalTypes = {
-    userId?: string
+type Journal = {
+    userID?: string
 }
 
 type IdType = {
@@ -10,16 +10,16 @@ type IdType = {
 }
 
 // Get all journals
-export async function getJournals(params: JournalTypes) {
+export async function getJournals(params: Journal) {
 
     try {
 
-        const userId  = params
+        const { userID }  = params
 
         let query: any = {}
 
-        if(userId) {
-            query.userId = userId
+        if(userID) {
+            query.userID = userID
         }
 
         const journals = await prisma.journal.findMany({
