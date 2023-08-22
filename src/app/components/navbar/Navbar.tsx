@@ -1,10 +1,15 @@
 // === Version 2 ===
 'use client'
+import { SafeUser } from "@/app/types";
 import { Box, Flex, Button, Link as ChakraLink, Text } from "@chakra-ui/react";
 import { signOut } from "next-auth/react";
 import NextLink from "next/link";
 
-function Navbar({ currentUser }) {
+type CurrentUser = {
+    currentUser:SafeUser | null
+}
+
+function Navbar({ currentUser }: CurrentUser) {
     return (
         <Box as="header" bg="teal.500" p={4} color="white">
             <Flex align="center" justify="space-between">
