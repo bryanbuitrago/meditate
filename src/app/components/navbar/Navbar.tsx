@@ -1,4 +1,3 @@
-// === Version 2 ===
 'use client'
 import { SafeUser } from "@/app/types";
 import { Box, Flex, Button, Link as ChakraLink, Text } from "@chakra-ui/react";
@@ -6,7 +5,7 @@ import { signOut } from "next-auth/react";
 import NextLink from "next/link";
 
 type CurrentUser = {
-    currentUser:SafeUser | null
+    currentUser: SafeUser | null;
 }
 
 function Navbar({ currentUser }: CurrentUser) {
@@ -17,7 +16,7 @@ function Navbar({ currentUser }: CurrentUser) {
                     <Text fontSize="lg">{currentUser?.name}</Text>
                 </Box>
 
-                <Box d="flex" alignItems="center">
+                <Flex alignItems="center">
                     <NextLink href="/journal" passHref>
                         <ChakraLink px={14}>Journal</ChakraLink>
                     </NextLink>
@@ -33,18 +32,13 @@ function Navbar({ currentUser }: CurrentUser) {
                     <NextLink href="/dashboard" passHref>
                         <ChakraLink px={14}>Dashboard</ChakraLink>
                     </NextLink>
-                    {
-                        currentUser ? 
-                            <Button ml={4} colorScheme="teal" variant="outline" onClick={() => signOut()}>Sign out</Button>
-                        :
-                            <NextLink href="/register" passHref>
-                                <ChakraLink px={2}>Register</ChakraLink>
-                            </NextLink>
-                    }
-                </Box>
+                    <Button ml={4} colorScheme="teal" variant="outline" onClick={() => signOut()}>
+                        Sign out
+                    </Button>
+                </Flex>
             </Flex>
         </Box>
     );
 }
 
-export default Navbar;
+export default Navbar
