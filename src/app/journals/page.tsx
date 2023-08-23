@@ -3,23 +3,6 @@ import { authOptions } from '@/utils/authOptions';
 import { getJournals } from '../actions/journal/journalActions';
 import JournalsList from '../components/journal/JournalsList';
 
-type Session = {
-  user: {
-    id: string
-  }
-}
-
-type JournalTypes = {
-  // Define the structure of a journal entry
-  // Example:
-  id: string;
-  title: string;
-  text: string;
-  userId: string
-  createdAt: string;
-  // ... other properties
-};
-
 async function JournalHistory() {
 
   const session = await getServerSession(authOptions)
@@ -27,13 +10,17 @@ async function JournalHistory() {
   if(!session) {
     return <div>Error or loading...</div>
   }
-  const { user } = session
 
-  const { id } = user
+  const userID = session?.user?.id
 
-  // const JournalEntries = await getJournals(userId)
+  if(!userID) {
+    return <div>Something wrong or loading...</div>
+  }
 
-  const journals = await getJournals(id)
+  const journals = await getJournals(userID)
+  if (!journals || !journals.length) {
+    return <div>No journal entries found</div>
+  }
 
   console.log('[JournalEntries Data]= ', journals)
   return (
