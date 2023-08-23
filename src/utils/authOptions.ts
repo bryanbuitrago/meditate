@@ -52,6 +52,11 @@ export const authOptions: NextAuthOptions = {
       callbacks: {
         // === Only runs & returns a user on sign in ===
         async jwt({ token, user, session }) {
+          // console.log('############[ JWT  ]###############')
+          // console.log('[JWT Callback *Token*]= ', token)
+          // console.log('[JWT Callback *User*]= ', user)
+          // console.log('[JWT Callback *Session*]= ', session)
+          // console.log('########################################')
           // console.log('jwt callback', { token, user, session})
           // pass in user id and email address to token
           if(user) {
@@ -65,6 +70,10 @@ export const authOptions: NextAuthOptions = {
         },
         async session({ session, token, user }) {
           // console.log('session callback', { session, token, user })
+          // console.log('############[ SESSION  ]###############')
+          // console.log('[Session Callback *Session*]= ', session)
+          // console.log('[Session Callback *Token*]= ', token)
+          // console.log('[Session Callback *User*]= ', user)
           return {
             ...session,
             user : {
