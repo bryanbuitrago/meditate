@@ -4,17 +4,17 @@ import Link from "next/link";
 import { _formatDate, _formatDuration } from "@/utils/dateTimeUtils";
 
 type Meditation = {
-  id: number
+  id: string
   time: number
   startDateTime: string
   createdAt: string
 }
 
-type MeditationsList = {
-  meditations: Meditation[]
+type MeditationList = {
+  meditations: Meditation[] 
 }
 
-function MeditationsList( { meditations }: MeditationsList ) {
+function MeditationsList( { meditations }: MeditationList ) {
     return (
       <Box as="ul">
         {meditations.map(meditation => (
@@ -30,7 +30,6 @@ function MeditationsList( { meditations }: MeditationsList ) {
                 <Heading as="h5" size="sm" mt={2}>
                 On this date & Time: {_formatDate(meditation.startDateTime)}
                 </Heading>
-
               </LinkOverlay>
             </Link>
           </LinkBox>
