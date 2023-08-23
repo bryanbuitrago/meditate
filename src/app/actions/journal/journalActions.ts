@@ -1,8 +1,8 @@
 import prisma from '../../../lib/prismadb'
 
 
-type Journal = {
-    userID?: string
+type UserID = {
+    userID?: string 
 }
 
 type IdType = {
@@ -10,11 +10,11 @@ type IdType = {
 }
 
 // Get all journals
-export async function getJournals(params: Journal) {
+export async function getJournals(params: any ) {
 
     try {
 
-        const { userID }  = params
+        const { userID }   = params
 
         let query: any = {}
 
@@ -29,12 +29,12 @@ export async function getJournals(params: Journal) {
             }
         })
 
-        const journalList = journals.map((journal) => ({
+        const journalsList = journals.map((journal) => ({
             ...journal,
             createdAt: journal.createdAt.toISOString(),
         }))
         
-        return journalList
+        return journalsList
     }
     catch( error: any) {
         return null   
