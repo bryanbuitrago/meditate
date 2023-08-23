@@ -10,7 +10,7 @@ type IdType = {
 }
 
 // Get all meditation sessions
-export async function getMeditations(params: MeditationTypes) {
+export async function getMeditations(params: any) {
 
     try {
 
@@ -32,6 +32,7 @@ export async function getMeditations(params: MeditationTypes) {
         const meditationList = meditations.map((meditation) => ({
             ...meditation,
             createdAt: meditation.createdAt.toISOString(),
+            startDateTime: meditation.startDateTime.toISOString(),
         }))
         
         return meditationList
