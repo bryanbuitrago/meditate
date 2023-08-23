@@ -6,19 +6,29 @@ import MeditationsList from "../components/meditation/MeditationsList"
 
 async function MeditationsPage() {
 
-// Server Route protection
   const session = await getServerSession(authOptions)
   console.log('[Session] = ', session)
-
-  const { id } = session?.user
   
+  if(!session) {
+    return <div>Error or loading...</div>
+  }
 
-  const meditationEntries = await getMeditations(id)
+  const userID = session?.user?.id
 
-  console.log('Meditations Data', meditationEntries)
+  if(!userID) {
+    return <div>Something wrong or loading...</div>
+  }
+
+
+  const meditations = await getMeditations(userID)
+  if (!meditations || !meditations.length) {
+    return <div>No Meditation entries found</div>
+  }
+
+  console.log('[MeditationsList Data]= ', meditations)
 
   return ( 
-     <MeditationsList meditations={meditationEntries} />
+     <MeditationsList meditations={meditations} />
   );
 }
 
