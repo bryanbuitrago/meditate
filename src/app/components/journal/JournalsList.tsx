@@ -12,9 +12,10 @@ type Journal = {
 }
 
 type JournalList = {
-  journals: Journal[]
+  journals: Journal[] 
 }
-function JournalsList({ journals }: JournalList) {
+
+function JournalsList({ journals }: JournalList) {  
   return (
     <Box as="ul">
       {journals.map(entry => (
