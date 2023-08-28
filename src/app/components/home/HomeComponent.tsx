@@ -78,6 +78,9 @@ const HomeComponent: React.FC = () => {
             </MotionLink>
           </NextLink>
         </Flex>
+        <Text color={'green.900'} fontSize="lg" textAlign="center" mb={8}>
+          Site is fully functional but still under construction. Please check back soon for upcoming updates.
+        </Text>
       </Flex>
     </Box>
   );
